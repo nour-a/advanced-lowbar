@@ -70,7 +70,7 @@ describe('_', function () {
       expect(spy.calledOnce).to.be.false;
       setTimeout(function () {
         expect(spy.calledOnce).to.be.true;
-         // done();
+        // done();
       }, 100);
     });
   });
@@ -100,17 +100,71 @@ describe('_', function () {
       expect(_.zip).to.be.a('function');
     });
     it('Merges together the values of each of the arrays with the values at the corresponding position', function () {
-      expect(_.zip([1, 2, 3], [4, 5, 6])).to.eqls([[1,4],[2,5],[3,6]]);
-      expect(_.zip([5, 7, 9])).to.eqls([[5],[7],[9]]);
-      
-      expect(_.zip('hi')).to.eqls([['h'],['i']]);
+      expect(_.zip([1, 2, 3], [4, 5, 6])).to.eqls([[1, 4], [2, 5], [3, 6]]);
+      expect(_.zip([5, 7, 9])).to.eqls([[5], [7], [9]]);
+      expect(_.zip('hi')).to.eqls([['h'], ['i']]);
     });
     it('return empty array for invalid input ', function () {
       expect(_.zip([])).to.eqls([]);
       expect(_.zip(343)).to.eqls([]);
-      expect(_.zip({a:9,v:8})).to.eqls([]);
+      expect(_.zip({a: 9, v: 8})).to.eqls([]);
     });
 
+  });
+  describe('#sortedIndex', function () {
+    it('is a function', function () {
+      expect(_.sortedIndex).to.be.a('function');
+    });
+    it('should determine the index at which the value should be inserted into the list ', function () {
+      expect(_.sortedIndex([10, 20, 30, 40, 50], 35)).to.equal(3);
+    });
+    it('return 0 for invalid inputs', function () {
+      expect(_.sortedIndex([5, 7, 9])).to.equal(0);
+      expect(_.sortedIndex('hi')).to.equal(0);
+    });
+  });
+  describe('#flatten', function () {
+    it('is a function', function () {
+      expect(_.flatten).to.be.a('function');
+    });
+    it('should flatten a nested array', function () {
+      expect(_.flatten([10, 20, 30, 40, 50])).to.eqls([10, 20, 30, 40, 50]);
+      expect(_.flatten([10, [20], 30, 40, 50])).to.eqls([10, 20, 30, 40, 50]);
+      expect(_.flatten([10, [20], [30,[40,50]]])).to.eqls([10, 20, 30, 40,50]);
+      expect(_.flatten([1, [2], [3, [[4]]]])).to.eqls([1, 2, 3,4]);
+      expect(_.flatten('pop')).to.eqls(['p','o','p']);
+    });
+    it('return [] for invalid input', function () {
+      expect(_.flatten(234)).to.eqls([]);
+      expect(_.flatten({})).to.eqls([]);
+    });
+  });
+  describe('#intersection', function () {
+    it('is a function', function () {
+      expect(_.intersection).to.be.a('function');
+    });
+    it('Computes the list of values that are the intersection of all the arrays', function () {
+      expect(_.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1])).to.eqls([1,2]);
+      expect(_.intersection([[1], 2, 3], [101, 2, 1, 10], [2, 1])).to.eqls([2]);
+      expect(_.intersection('n', 'no', 'nou')).to.eqls(['n']);
+    });
+    it('return [] for invalid input', function () {
+      expect(_.intersection(234)).to.eqls([]);
+      expect(_.intersection({})).to.eqls([]);
+    });
+  });
+  describe('#difference', function () {
+    it('is a function', function () {
+      expect(_.difference).to.be.a('function');
+    });
+    it('Computes the list of values that are the intersection of all the arrays', function () {
+      expect(_.difference([1, 2, 3, 4, 5], [5, 2, 10])).to.eqls([1,3,4]);
+      expect(_.difference([[1], 2, 3], [101, 2, 1, 10], [2, 1])).to.eqls([[1],3]);
+    });
+    it('return [] for invalid input', function () {
+      expect(_.difference(234)).to.eqls([]);
+      expect(_.difference({})).to.eqls([]);
+    });
   });
 
 });

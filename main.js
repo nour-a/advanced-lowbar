@@ -103,5 +103,59 @@ _.zip = function () {
     }
     return result;
 };
+_.sortedIndex = function (list, value) {
+    if (arguments.length <= 1 || !Array.isArray(list)) {
+        return 0;
+    } else {
+        var start = 0;
+        var end = list.length;
+        while (start < end) {
+            var mid = Math.floor((start + end) / 2);
+            if (list[mid] > value) {
+                end = mid;
+            } else {
+                start = mid + 1;
+            }
+        }
+        return end;
+    }
+};
+_.flatten = function (arr) {
+    if (typeof arr === 'string') {
+        arr = arr.split('');
+    }
+    var result = [];
+    for (var i = 0; i < arr.length; i++) {
+        if (!Array.isArray(arr[i])) {
+            result.push(arr[i]);
+        }
+        if (Array.isArray(arr[i])) {
+            result = result.concat(_.flatten(arr[i]));
+        }
+    }
+    return result;
+};
+_.intersection = function () {
+    var result = [];
+    for (var i = 1; i < arguments.length; i++) {
+        for (var j = 0; j < arguments[0].length; j++) {
+            if (arguments[i].indexOf(arguments[0][j]) !== -1 && result.indexOf(arguments[0][j]) === -1) {
+                    result.push(arguments[0][j]);
+            }
+        }
+    }
+    return result;
+};
+_.difference = function () {
+    var result = [];
+    for (var i = 1; i < arguments.length; i++) {
+        for (var j = 0; j < arguments[0].length; j++) {
+            if (arguments[i].indexOf(arguments[0][j]) === -1 && result.indexOf(arguments[0][j]) === -1) {
+                    result.push(arguments[0][j]);
+            }
+        }
+    }
+    return result;
 
+};
 module.exports = _;
