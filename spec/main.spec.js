@@ -1,6 +1,5 @@
 const path = require('path');
 var expect = require('chai').expect;
-// var indexOf = require('../main.js');
 var _ = require(path.join(__dirname, '..', './main.js'));
 var sinon = require('sinon');
 describe('_', function () {
