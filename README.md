@@ -12,8 +12,7 @@ The functions are as follow:
 8. flatten
 9. intersection
 10. difference
-11. throttle
----
+
 This project was completed using TDD (Test Driven Development) and Node.js and tested using Mocha/Chai.
 
 ## Prerequisites
